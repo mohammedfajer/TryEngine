@@ -137,7 +137,37 @@ struct Transform {
 struct Game_Object {
     
 	Transform transform;
+    std::string name;
+    
 };
+
+struct Numbers {
+    int *items;
+    size_t count;
+    size_t capacity;
+};
+
+
+
+#define da_append(arr, item)\
+do{\
+if(arr.count >= arr.capacity) {\
+if(arr.capacity == 0) arr.capacity = 256;\
+else arr.capacity *= 2;\
+arr.items = static_cast<decltype(arr.items)> (realloc(arr.items, arr.capacity *sizeof(arr.items)));\
+}\
+arr.items[arr.count++] = item;\
+} while(0)
+
+
+void use_dynamic_array() {
+    Numbers nums = {0};
+    
+    da_append(nums, 1);
+    da_append(nums, 2);
+    
+    for(size_t i=0; i<nums.count; i++) std::cout << nums.items[i] << std::endl;
+}
 
 
 global_variable Engine_Mode g_Mode = Editor;
@@ -171,6 +201,8 @@ internal void setup_docspace() {
 }
 
 int main(int argc, char* argv[]) {
+    
+    
     
 	// Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
