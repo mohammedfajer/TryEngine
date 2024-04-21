@@ -14,6 +14,8 @@
 
 
 #include "main.h"
+#include "vectors.cpp"
+#include "matrices.cpp"
 #include "os_services.cpp"
 #include "shaders.cpp"
 #include "mesh.cpp"
@@ -43,18 +45,27 @@ int main(int argc, char* argv[]) {
     g_game.window = &g_window;
     game_setup(&g_game);
     
+    Array<IEngineScene*, 2> scenes;
     
     Scene_Test test_scene;
+    Lighting_Scene lighting_scene;
+    
+    scenes.add(&test_scene);
+    scenes.add(&lighting_scene);
     
     SM_TRACE("Game Setup Done...");
     
     imgui_setup(window, g_game.gl_context, g_game.glsl_version);
     
     window_framebuffer_size_callback(window, SCR_WIDTH, SCR_HEIGHT);
+    
     scene_state_manager_set(&test_scene);
     
     // Show the window when ready
     SDL_ShowWindow(window);
+    //SDL_SetRelativeMouseMode( SDL_TRUE );
+
+    glEnable(GL_DEPTH_TEST);
     
     // Main loop
     while (!quit) {
@@ -66,6 +77,8 @@ int main(int argc, char* argv[]) {
         game_input(&g_game);
         
         scene_state_manager_update(deltaTime);
+        
+        scene_switch(scenes);
         
         scene_state_manager_render();
         

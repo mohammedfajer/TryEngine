@@ -1,6 +1,7 @@
 enum class Space { Self, World };
 
 // Function to rotate an object's orientation
+// @nocheckin self has the gimbal lock issue (fix later)
 void Rotate(glm::quat& orientation, float xAngle, float yAngle, float zAngle, Space relativeTo = Space::Self) {
     // Convert the Euler angles to quaternions
     glm::quat xRot = glm::angleAxis(glm::radians(xAngle), glm::vec3(1.0f, 0.0f, 0.0f));
