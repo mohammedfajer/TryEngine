@@ -1,6 +1,5 @@
 @echo off
-
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+REM call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 
 SET SDL_PATH=..\thirdparty\SDL2
 SET LIB_PATH=..\thirdparty

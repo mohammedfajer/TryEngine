@@ -16,6 +16,9 @@ window_setup(Window *window)
         
 	}
     
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
+
 	// Create an SDL window
 	window->display_window = SDL_CreateWindow("SDL2 OpenGL", SDL_WINDOWPOS_UNDEFINED,
                                               SDL_WINDOWPOS_UNDEFINED, SCR_WIDTH, SCR_HEIGHT,
@@ -98,7 +101,8 @@ game_setup(Simulation_Game *game)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    
+     glEnable(GL_MULTISAMPLE);  
+   
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
     stbi_set_flip_vertically_on_load(true);
     

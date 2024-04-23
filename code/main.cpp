@@ -13,6 +13,7 @@
 #include <imgui_impl_opengl3.h>
 
 
+
 #include "main.h"
 #include "vectors.cpp"
 #include "matrices.cpp"
@@ -25,6 +26,7 @@
 #include "rotate.cpp"
 #include "framebuffer.cpp"
 #include "engine.cpp"
+#include "utilities.cpp"
 #include "game.cpp"
 
 // timing
@@ -45,13 +47,21 @@ int main(int argc, char* argv[]) {
     g_game.window = &g_window;
     game_setup(&g_game);
     
-    Array<IEngineScene*, 2> scenes;
+    Array<IEngineScene*, 6> scenes;
     
     Scene_Test test_scene;
     Lighting_Scene lighting_scene;
+    Lighting_Maps_Scene lighting_maps_scene;
+    Light_Casters_Directional_Light_Scene light_casters_directional_light_scene; 
+    Light_Casters_Point_Light_Scene light_casters_point_light_scene;
+    Light_Casters_Spot_Light_Scene light_casters_spot_light_scene;
     
     scenes.add(&test_scene);
     scenes.add(&lighting_scene);
+    scenes.add(&lighting_maps_scene);
+    scenes.add(&light_casters_directional_light_scene);
+    scenes.add(&light_casters_point_light_scene);
+    scenes.add(&light_casters_spot_light_scene);
     
     SM_TRACE("Game Setup Done...");
     
